@@ -17,13 +17,13 @@ public:
 	virtual FName GetSectionName()   const override { return "Authenticator"; }
 #endif
 	
-	UPROPERTY(EditAnywhere, config, Category = "License")
+	UPROPERTY(EditAnywhere, config, Category = "License", meta = (ToolTip = "License UUID to validate."))
 	FString License;
 
-	UPROPERTY(EditAnywhere, config, Category = "License")
+	UPROPERTY(EditAnywhere, config, Category = "License", meta = (DisplayName = "License Server URL", ToolTip = "Base endpoint used for license validation. The plugin appends the license key unless the URL contains {License}."))
 	FString LicenseServerUrl = TEXT("http://127.0.0.1:8765/licenses");
 
-	UPROPERTY(EditAnywhere, config, Category = "License")
+	UPROPERTY(EditAnywhere, config, Category = "License", meta = (DisplayName = "License Server Authorization Header", ToolTip = "Optional full Authorization header value sent to the license server."))
 	FString LicenseServerAuthorizationHeader;
 
 	FString ValidationResultMessage;

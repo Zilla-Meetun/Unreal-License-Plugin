@@ -44,7 +44,7 @@ void UAuthenticatorSettings::ValidateLicense()
 		return;
 	}
 	
-	ValidationResultMessage = TEXT("Requesting Validation...");
+	ValidationResultMessage = TEXT("Requesting validation...");
 	RefreshValidationUI();
 	const FString Endpoint = BuildLicenseValidationUrl(LicenseServerUrl, License);
 

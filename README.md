@@ -1,6 +1,6 @@
 # Unreal License Plugin
 
-Unreal project containing the `LicenseSystem` plugin. The plugin checks a configured license key against a license server before allowing editor/runtime use.
+Unreal project containing the `LicenseSystem` plugin. The plugin checks a configured license key against a license server before allowing editor and runtime use.
 
 ## Local Test Server
 
@@ -57,7 +57,7 @@ Project Settings > Plugins > Authenticator
 Editable fields:
 
 - `License`: the license UUID to validate.
-- `License Server Url`: the base endpoint used for validation.
+- `License Server URL`: the base endpoint used for validation.
 - `License Server Authorization Header`: optional full Authorization header value.
 
 By default, the URL is provided by C++ as:
@@ -79,7 +79,7 @@ LicenseServerAuthorizationHeader=
 
 Before packaging a real project:
 
-1. Replace `License Server Url` with your production endpoint.
+1. Replace `License Server URL` with your production endpoint.
 2. Replace the mock `License` with a real license key.
 3. Set `License Server Authorization Header` only if your server requires it.
 4. Make sure the packaged build can reach the configured endpoint.

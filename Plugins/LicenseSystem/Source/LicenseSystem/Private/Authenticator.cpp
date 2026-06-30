@@ -29,22 +29,22 @@ void Authenticator::SendAuthenticationRequest(const FString& URL, const FString&
 {
 	if (AuthorizationType == EAuthType::ENone)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No Authentication type is set.\nPlease choose a type if Authentication is needed"))
-		OnAuthenticationRequestFailed.Broadcast(TEXT("No Authentication type is set.\nPlease choose a type if Authentication is needed"));
+		UE_LOG(LogTemp, Warning, TEXT("No authentication type is set.\nChoose a type if authentication is needed."))
+		OnAuthenticationRequestFailed.Broadcast(TEXT("No authentication type is set.\nChoose a type if authentication is needed."));
 		return;
 	}
 	if ((Username.IsEmpty() && Password.IsEmpty()) && Body.IsEmpty() && CustomBody.IsEmpty())
 	{
-		UE_LOG(LogTemp, Verbose, TEXT("Missing Username/Password Credentials, Custom Credentials and Request body. At least one is needed for Authentication.\nPlease include if Authentication is needed"))
-		OnAuthenticationRequestFailed.Broadcast(TEXT("Missing Username/Password Credentials, Custom Credentials and Request body. At least one is needed for Authentication.\nPlease include if Authentication is needed"));
+		UE_LOG(LogTemp, Verbose, TEXT("Missing username/password credentials, custom credentials, and request body. At least one is needed for authentication."))
+		OnAuthenticationRequestFailed.Broadcast(TEXT("Missing username/password credentials, custom credentials, and request body. At least one is needed for authentication."));
 		return;
 	}
 	if (AuthorizationType == EAuthType::EBasicAuth)
 	{
 		if (Username.IsEmpty() && Password.IsEmpty())
 		{
-			UE_LOG(LogTemp, Verbose, TEXT("Basic Auth Requires Either Username or Password to be set"))
-			OnAuthenticationRequestFailed.Broadcast(TEXT("Basic Auth Requires Either Username or Password to be set"));
+			UE_LOG(LogTemp, Verbose, TEXT("Basic auth requires either username or password to be set."))
+			OnAuthenticationRequestFailed.Broadcast(TEXT("Basic auth requires either username or password to be set."));
 			return;
 		}
 		Body = FString::Printf(TEXT("Basic %s"), *FBase64::Encode(Username+ ":" +Password)); //Need to decide if the request should be made
@@ -82,7 +82,7 @@ void Authenticator::SendAuthenticationRequest(const FString& URL, const FString&
 		}
 		if (!bWasSuccessful  || !Response.IsValid())
 		{
-			this->OnAuthenticationRequestFailed.Broadcast(TEXT("Request was unsuccessful. Response is not valid"));
+			this->OnAuthenticationRequestFailed.Broadcast(TEXT("Request was unsuccessful. The response is not valid."));
 			return;
 		}
 		FString ResponseString = Response->GetContentAsString();
@@ -90,7 +90,7 @@ void Authenticator::SendAuthenticationRequest(const FString& URL, const FString&
 		TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(ResponseString);
 		if (!FJsonSerializer::Deserialize(Reader, JsonObject) && JsonObject.IsValid())
 		{
-			this->OnAuthenticationRequestFailed.Broadcast(FString::Printf(TEXT("Request response is not a valid json.\nResponse received: %s"), *ResponseString));
+			this->OnAuthenticationRequestFailed.Broadcast(FString::Printf(TEXT("Request response is not valid JSON.\nResponse received: %s"), *ResponseString));
 			return;
 		}
 		FString AuthorizationValue;
@@ -116,7 +116,7 @@ FString Authenticator::GetAuthorizationCode()
 {
 	if (!bIsAuthenticated)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Authorization value may be incorrect. Has not been verified"))
+		UE_LOG(LogTemp, Warning, TEXT("Authorization value may be incorrect. It has not been verified."))
 	}
 	return Authorization;
 }

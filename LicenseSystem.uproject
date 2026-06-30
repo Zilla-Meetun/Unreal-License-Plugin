@@ -5,7 +5,7 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "LiscenseSystem",
+			"Name": "LicenseSystemGame",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}

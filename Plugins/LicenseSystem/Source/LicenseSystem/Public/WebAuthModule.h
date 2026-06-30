@@ -8,7 +8,7 @@
 #endif
 DECLARE_LOG_CATEGORY_EXTERN(LogLicenseSystem, Log, All);
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnLicensenRequestResponse, const FString&);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnLicenseRequestResponse, const FString&);
 
 class LICENSESYSTEM_API FLicenseSystemModule : public IModuleInterface
 {
@@ -27,7 +27,7 @@ public:
 private:
 	void CheckLicenseAsync() const;
 	
-	FOnLicensenRequestResponse OnLicenseRequestResponseDelegate;
+	FOnLicenseRequestResponse OnLicenseRequestResponseDelegate;
 	void OnLicenseRequestResponse(const FString& Response);
 
 #if WITH_EDITOR

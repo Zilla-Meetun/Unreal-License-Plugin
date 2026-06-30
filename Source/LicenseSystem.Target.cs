@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class LiscenseSystemTarget : TargetRules
+public class LicenseSystemTarget : TargetRules
 {
-	public LiscenseSystemTarget(TargetInfo Target) : base(Target)
+	public LicenseSystemTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V6;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
-		ExtraModuleNames.Add("LiscenseSystem");
+		ExtraModuleNames.Add("LicenseSystemGame");
 	}
 }

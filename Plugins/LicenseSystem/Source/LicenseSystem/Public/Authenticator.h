@@ -13,7 +13,7 @@ enum class EAuthType : uint8
 {
 	ENone = 0 UMETA(displayName = "No Auth"),
 	EToken = 1 UMETA(displayName = "Token"),
-	EBearerToken = 2 UMETA(displayName = "Bearer Toekn"),
+	EBearerToken = 2 UMETA(displayName = "Bearer Token"),
 	EBasicAuth = 3 UMETA(displayName = "Basic Auth"),
 };
 
@@ -30,7 +30,7 @@ public:
 	{
 		if (AuthType == EAuthType::ENone)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Consider Setting an AuthType"));
+			UE_LOG(LogTemp, Warning, TEXT("Consider setting an AuthType."));
 		}
 		SetAuthType(AuthType);
 		SetCredentials(User, Pass);
@@ -40,7 +40,7 @@ public:
 	{
 		if (AuthType == EAuthType::ENone)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Consider Setting an AuthType"));
+			UE_LOG(LogTemp, Warning, TEXT("Consider setting an AuthType."));
 		}
 		SetAuthType(AuthType);
 	}

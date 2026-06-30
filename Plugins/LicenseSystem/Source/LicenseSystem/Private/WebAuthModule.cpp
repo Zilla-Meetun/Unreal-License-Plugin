@@ -110,7 +110,7 @@ void FLicenseSystemModule::CheckLicenseAsync() const
 	FGuid Dummy;
 	if (!FGuid::Parse(License, Dummy))
 	{
-		OnLicenseRequestResponseDelegate.Broadcast(TEXT("Not a valid UUID"));
+		OnLicenseRequestResponseDelegate.Broadcast(TEXT("License is not a valid UUID."));
 		return;
 	}
 
@@ -192,7 +192,7 @@ void FLicenseSystemModule::OnLicenseRequestResponse(const FString& Response)
 					{
 						FMessageDialog::Open(
 							EAppMsgType::Ok,
-							FText::FromString(FString::Printf(TEXT("this application is using unlicensed code and has been closed, please contact the app developer for assistance")))
+							FText::FromString(TEXT("This application is using unlicensed code and has been closed. Please contact the app developer for assistance."))
 						);
 						return false;
 					}
@@ -207,10 +207,7 @@ void FLicenseSystemModule::OnLicenseRequestResponse(const FString& Response)
 
 	{
 		const FString Title = TEXT("License Check Failed");
-		const FString Body  = FString::Printf(
-			TEXT("This application is using unlicensed code and has been closed, please contact the app developer for assistance"),
-			*Response
-		);
+		const FString Body = TEXT("This application is using unlicensed code and has been closed. Please contact the app developer for assistance.");
 		
 		FPlatformMisc::MessageBoxExt(EAppMsgType::Ok, *Body, *Title);
 	}

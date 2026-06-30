@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class LiscenseSystem : ModuleRules
+public class LicenseSystemGame : ModuleRules
 {
-	public LiscenseSystem(ReadOnlyTargetRules Target) : base(Target)
+	public LicenseSystemGame(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	

@@ -107,25 +107,25 @@ void FLicenseGateModule::OnLicenseHttpComplete(FHttpRequestPtr Request, FHttpRes
 	};
 
 	if (!bSucceeded || !Response.IsValid())
-		return Fail(TEXT("Unable to reach licensing server."));
+		return Fail(TEXT("Unable to reach the license server."));
 
 	const int32 Code = Response->GetResponseCode();
-	if (Code == 404) return Fail(TEXT("Unable to reach licensing server."));
+	if (Code == 404) return Fail(TEXT("Unable to reach the license server."));
 	if (Code < 200 || Code >= 300)
 		return Fail(FString::Printf(TEXT("License server returned HTTP %d."), Code));
 
 	const FString Body = Response->GetContentAsString();
 	TSharedPtr<FJsonObject> Root;
 	if (!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Body), Root) || !Root.IsValid())
-		return Fail(TEXT("Malformed licensing response (Invalid Json Response)."));
+		return Fail(TEXT("Malformed license response: invalid JSON."));
 
 	const TSharedPtr<FJsonObject>* LicenseObj = nullptr;
 	if (!Root->TryGetObjectField(TEXT("license"), LicenseObj) || !LicenseObj || !LicenseObj->IsValid())
-		return Fail(TEXT("Malformed licensing response (Missing License)."));
+		return Fail(TEXT("Malformed license response: missing license object."));
 
 	bool bIsValid = false;
 	if (!(*LicenseObj)->TryGetBoolField(TEXT("is_valid"), bIsValid) || !bIsValid)
-		return Fail(TEXT("License has been checked and is not valid."));
+		return Fail(TEXT("The license was checked and is not valid."));
 
 }
 
@@ -134,7 +134,7 @@ void FLicenseGateModule::KillEditorNow(const FString& Reason) const
 {
 	UE_LOG(LogLicenseGate, Error, TEXT("Unreal Editor will now close.\n\nReason:\n%s"), *Reason);
 	const FString Title = TEXT("License Check Failed");
-	const FString Body  = FString::Printf(TEXT("Reason:\n%s\nLicense invalidated."), *Reason);
+	const FString Body  = FString::Printf(TEXT("Reason:\n%s\nLicense validation failed."), *Reason);
 	FPlatformMisc::MessageBoxExt(EAppMsgType::Ok, *Body, *Title);
 	FPlatformMisc::RequestExitWithStatus(true, 1);
 
