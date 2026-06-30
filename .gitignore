@@ -13,6 +13,7 @@ Saved/
 *.user
 *.userosscache
 *.sln.DotSettings.user
+*.sln
 
 # Build artifacts
 *.opensdf
